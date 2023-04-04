@@ -37,12 +37,9 @@ function get_elements(directory)
     return elements
 end
 
-# get all HTML documents from given directories, and replace elements with matching IDs with given elements
-function replace_elements!(elements; directories = [pwd()])
-    files = Vector()
-    foreach(directories) do dir
-        append!(files, HTMLfiles(dir))
-    end
+# get all HTML documents from given directory, and replace elements with matching IDs with given elements
+function replace_elements!(elements, directory = pwd())
+    files = HTMLfiles(directory)
 
     for file in files
         changes = false
@@ -106,10 +103,10 @@ function parse_commandline()
 
     @add_arg_table! s begin
         "source"
-        help = "a directory with HTML documents, holding common HTML elements"
+        help = "a directory with HTML documents acting as templates, containing common HTML elements"
         required = true
         "target"
-        help = "a directory with HTML documnets, holding HTML elements to be replaced by matching elements from source directory"
+        help = "a directory with HTML documnets, containing HTML elements to be replaced by matching elements from source directory"
         required = false
     end
     
