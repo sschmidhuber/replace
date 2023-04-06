@@ -113,7 +113,7 @@ function parse_commandline()
     return parse_args(s)
 end
 
-function main()
+function main()::Cint
     args = parse_commandline()
 
     elements = get_elements(args["source"])
@@ -122,6 +122,8 @@ function main()
     else
         replace_elements!(elements)
     end
+
+    return 0
 end
 
 main()
